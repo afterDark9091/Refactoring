@@ -1,0 +1,22 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: continuumio/miniconda 
+    steps:
+      - checkout
+      - run:
+          name: Hello World test
+          command: |
+            echo "Hello world"
+      - run: 
+          name: Install dependencies
+          command: |
+            conda create env -n test_env --file=environment.yml 
+            source activate test_env
+      - run:
+          name: Run tests
+          command: |
+            nosetests
+        
